@@ -17,7 +17,7 @@ main = do
 checkRuleFirings :: FilePath -> IO ()
 checkRuleFirings file = do
     dump <- readFile file
-    let strip = maybe id Set.insert . stripPrefix "Rule fired: "
+    let strip = maybe id (Set.insert . fst . break (== ' ')) . stripPrefix "Rule fired: "
     let fired = foldr strip Set.empty (lines dump)
     let unmatched = wanted `Set.difference` fired
     case Set.null unmatched of
