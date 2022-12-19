@@ -620,7 +620,7 @@ timeOfDayToDayFraction = view dayFraction
 -- @
 {-# INLINE utcToLocalTime #-}
 utcToLocalTime :: TimeZone -> UTCTime -> LocalTime
-utcToLocalTime = view . utcLocalTime
+utcToLocalTime z = view (utcLocalTime z)
 
 -- | Convert a 'LocalTime' in the given 'TimeZone' to a 'UTCTime'.
 --
@@ -629,7 +629,7 @@ utcToLocalTime = view . utcLocalTime
 -- @
 {-# INLINE localTimeToUTC #-}
 localTimeToUTC :: TimeZone -> LocalTime -> UTCTime
-localTimeToUTC = review . utcLocalTime
+localTimeToUTC z = review (utcLocalTime z)
 
 -- | Convert a 'UniversalTime' to a 'LocalTime' at the given medidian in
 -- degrees East.
@@ -639,7 +639,7 @@ localTimeToUTC = review . utcLocalTime
 -- @
 {-# INLINE ut1ToLocalTime #-}
 ut1ToLocalTime :: Rational -> UniversalTime -> LocalTime
-ut1ToLocalTime = view . ut1LocalTime
+ut1ToLocalTime r = view (ut1LocalTime r)
 
 -- | Convert a 'LocalTime' at the given meridian in degrees East to
 -- a 'UniversalTime'.
@@ -649,7 +649,7 @@ ut1ToLocalTime = view . ut1LocalTime
 -- @
 {-# INLINE localTimeToUT1 #-}
 localTimeToUT1 :: Rational -> LocalTime -> UniversalTime
-localTimeToUT1 = review . ut1LocalTime
+localTimeToUT1 r = review (ut1LocalTime r)
 
 -- | Convert a 'UTCTime' and the given 'TimeZone' into a 'ZonedTime'.
 --

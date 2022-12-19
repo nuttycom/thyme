@@ -344,7 +344,7 @@ diffAbsoluteTime = (.-.)
 -- @
 {-# INLINE utcToTAITime #-}
 utcToTAITime :: TAIUTCMap -> UTCTime -> AbsoluteTime
-utcToTAITime = view . absoluteTime
+utcToTAITime t = view (absoluteTime t)
 
 -- | Using a 'TAIUTCMap', convert a 'AbsoluteTime' to 'UTCTime'.
 --
@@ -353,5 +353,5 @@ utcToTAITime = view . absoluteTime
 -- @
 {-# INLINE taiToUTCTime #-}
 taiToUTCTime :: TAIUTCMap -> AbsoluteTime -> UTCTime
-taiToUTCTime = review . absoluteTime
+taiToUTCTime t = review (absoluteTime t)
 

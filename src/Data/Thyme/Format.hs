@@ -344,7 +344,7 @@ instance FormatTime MonthDay where
 
 instance FormatTime OrdinalDate where
     {-# INLINEABLE showsTime #-}
-    showsTime TimeLocale {..} (OrdinalDate y d) = \ def c -> case c of
+    showsTime TimeLocale {} (OrdinalDate y d) = \ def c -> case c of
         -- Year
         'Y' -> showsY y
         'y' -> shows02 (mod y 100)
@@ -838,7 +838,7 @@ instance ParseTime LocalTime where
 
 instance ParseTime Day where
     {-# INLINE buildTime #-}
-    buildTime tp@TimeParse {..}
+    buildTime tp@TimeParse {}
         | tp ^. flag IsOrdinalDate = ordinalDate # buildTime tp
         | tp ^. flag IsGregorian = gregorian # buildTime tp
         | tp ^. flag IsWeekDate = weekDate # buildTime tp
