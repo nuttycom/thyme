@@ -1,0 +1,7 @@
+packages:
+    ./
+
+source-repository-package
+    type: git
+    location: https://github.com/nuttycom/true-name.git
+    tag: 2617b5b9243dad321dad4b91489964443fb0cde5
