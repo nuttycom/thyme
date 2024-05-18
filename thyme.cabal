@@ -1,3 +1,5 @@
+cabal-version:  3.0
+
 name:           thyme
 version:        0.4
 synopsis:       A faster time library
@@ -7,15 +9,14 @@ description:
     .
     See @<http://hackage.haskell.org/package/thyme/docs/Data-Thyme-Docs.html Data.Thyme.Docs>@
     for a full description.
-homepage:       https://github.com/fumieval/thyme
-license:        BSD3
+homepage:       https://github.com/haskell-github-trust/thyme
+license:        BSD-3-Clause
 license-file:   LICENSE
 author:         Liyang HU, Ashley Yakeley
-maintainer:     Fumiaki Kinoshita <fumiexcel@gmail.com>
+maintainer:     Fumiaki Kinoshita <fumiexcel@gmail.com>, Kris Nuttycombe <kris@nutty.land>
 copyright:      © 2013−2014 Liyang HU
 category:       Data, System
 build-type:     Simple
-cabal-version:  >= 1.10
 stability:      experimental
 extra-source-files:
     CHANGELOG.md
@@ -26,7 +27,7 @@ tested-with:
 
 source-repository head
     type:       git
-    location:   https://github.com/fumieval/thyme
+    location:   https://github.com/haskell-github-trust/thyme
 
 flag bug-for-bug
     description: bug-for-bug compatibility with time
@@ -86,6 +87,8 @@ library
         other-modules: Control.Lens
     build-depends:
         QuickCheck >= 2.4,
+        StateVar >= 1.1.1.1,
+        contravariant >= 1.5,
         attoparsec >= 0.10,
         aeson >= 0.6,
         base >= 4.5 && < 5,
@@ -93,23 +96,23 @@ library
         containers >= 0.5,
         deepseq >= 1.2,
         hashable >= 1.2,
-        mtl >= 1.1,
+        mtl >= 2.2.2,
         old-locale >= 1.0,
-        random,
-        text >= 0.11,
-        template-haskell >= 2.7 && < 2.21,
+        random >= 1.0.1.1,
+        text >= 1.2.3.0,
+        template-haskell,
         time >= 1.4,
-        vector >= 0.9,
-        vector-th-unbox >= 0.2.1.0,
-        vector-space >= 0.8
+        vector >= 0.12,
+        vector-th-unbox >= 0.2.1.6,
+        vector-space >= 0.15
 
     if os(windows)
         build-depends: Win32
     if os(darwin) || os(freebsd)
-        build-tools: cpphs
+        build-tool-depends: cpphs:cpphs >= 1.20
         ghc-options: "-pgmP cpphs --cpp"
     if flag(lens) || flag(docs)
-        build-depends: lens >= 3.9
+        build-depends: lens
     else
         build-depends: profunctors >= 3.1.2
     if flag(docs)
@@ -143,7 +146,7 @@ test-suite sanity
     if flag(lens)
         build-depends: lens
     else
-        build-depends: profunctors, mtl
+        build-depends: profunctors, mtl >= 2.2.2
     ghc-options: -Wall
 
 test-suite rewrite
